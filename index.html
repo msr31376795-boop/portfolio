@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Md Saifur Rahman — Academic Portfolio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #2d3436;
+            background: #fafafa;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(27, 58, 92, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            height: 64px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+        }
+        nav .logo {
+            color: #fff; font-size: 1.15rem; font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        nav .logo span { color: #4da6ff; }
+        nav ul { display: flex; gap: 1.8rem; }
+        nav ul li a {
+            color: rgba(255,255,255,0.85); font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        nav ul li a:hover { color: #fff; }
+
+        /* ── Hero ── */
+        .hero {
+            min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1b3a5c 0%, #2c5f8a 50%, #1b3a5c 100%);
+            color: #fff;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 800px; }
+        .hero .title {
+            font-size: 3.2rem; font-weight: 700; margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        .hero .subtitle {
+            font-size: 1.25rem; color: rgba(255,255,255,0.8);
+            margin-bottom: 2rem; font-weight: 300;
+        }
+        .hero .contact-line {
+            font-size: 1rem; color: rgba(255,255,255,0.7);
+            margin-bottom: 2.5rem;
+        }
+        .hero .contact-line a {
+            color: #4da6ff; margin: 0 0.6rem;
+            transition: color 0.2s;
+        }
+        .hero .contact-line a:hover { color: #fff; }
+        .hero-btn {
+            display: inline-block;
+            padding: 0.85rem 2.2rem;
+            background: #4da6ff; color: #fff; border: none;
+            border-radius: 6px; font-size: 1rem; font-weight: 600;
+            cursor: pointer; transition: background 0.2s, transform 0.2s;
+        }
+        .hero-btn:hover { background: #3a8fd4; transform: translateY(-2px); }
+
+        /* ── Sections ── */
+        section {
+            max-width: 960px; margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+        .section-title {
+            font-size: 2rem; font-weight: 700; color: #1b3a5c;
+            margin-bottom: 0.5rem; position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: ''; position: absolute; bottom: -8px; left: 0;
+            width: 50px; height: 4px; background: #4da6ff; border-radius: 2px;
+        }
+        .section-subtitle {
+            color: #636e72; margin-bottom: 2.5rem; font-size: 1rem;
+        }
+
+        /* ── About ── */
+        .about-text {
+            font-size: 1.05rem; color: #444;
+            line-height: 1.8;
+        }
+        .about-text p { margin-bottom: 1rem; }
+        .highlight { color: #1b3a5c; font-weight: 600; }
+
+        /* ── Education Cards ── */
+        .edu-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem; margin-top: 1rem;
+        }
+        .edu-card {
+            background: #fff; border-radius: 10px; padding: 1.5rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border-left: 4px solid #4da6ff;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .edu-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+        .edu-card .degree { font-size: 1.1rem; font-weight: 700; color: #1b3a5c; margin-bottom: 0.3rem; }
+        .edu-card .school { color: #636e72; font-size: 0.95rem; margin-bottom: 0.2rem; }
+        .edu-card .date { color: #b2bec3; font-size: 0.85rem; margin-bottom: 0.7rem; }
+        .edu-card .detail { font-size: 0.9rem; color: #555; }
+
+        /* ── Teaching ── */
+        .teaching-block {
+            background: #fff; border-radius: 10px; padding: 1.8rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 1.5rem;
+        }
+        .teaching-block h3 { color: #1b3a5c; font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .teaching-block .org { color: #4da6ff; font-size: 0.9rem; margin-bottom: 0.2rem; }
+        .teaching-block .period { color: #b2bec3; font-size: 0.85rem; margin-bottom: 0.8rem; }
+        .teaching-block ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+        .teaching-block ul li { color: #555; font-size: 0.92rem; margin-bottom: 0.4rem; }
+
+        /* ── Courses ── */
+        .course-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem; margin-top: 1rem;
+        }
+        .course-cat {
+            background: #fff; border-radius: 8px; padding: 1.2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .course-cat h4 { color: #4da6ff; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.7rem; }
+        .course-cat ul { padding-left: 1.1rem; }
+        .course-cat ul li { color: #555; font-size: 0.9rem; margin-bottom: 0.3rem; }
+
+        /* ── Publications ── */
+        .pub-group { margin-bottom: 2rem; }
+        .pub-group h3 {
+            color: #1b3a5c; font-size: 1.2rem; margin-bottom: 1rem;
+            padding-bottom: 0.4rem; border-bottom: 2px solid #dfe6e9;
+        }
+        .pub-item {
+            padding: 0.8rem 0; border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+        }
+        .pub-item:last-child { border-bottom: none; }
+        .pub-item .authors { color: #636e72; font-size: 0.85rem; margin-bottom: 0.2rem; }
+        .pub-item .title { color: #1b3a5c; font-weight: 600; font-style: italic; }
+        .pub-item .journal { color: #4da6ff; font-size: 0.85rem; }
+        .pub-item .doi { color: #b2bec3; font-size: 0.8rem; }
+
+        /* ── Experience ── */
+        .exp-item {
+            background: #fff; border-radius: 10px; padding: 1.5rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 1rem;
+        }
+        .exp-item .role { font-size: 1.1rem; font-weight: 700; color: #1b3a5c; margin-bottom: 0.2rem; }
+        .exp-item .company { color: #4da6ff; font-size: 0.95rem; margin-bottom: 0.1rem; }
+        .exp-item .period { color: #b2bec3; font-size: 0.85rem; margin-bottom: 0.7rem; }
+        .exp-item ul { padding-left: 1.2rem; }
+        .exp-item ul li { color: #555; font-size: 0.9rem; margin-bottom: 0.3rem; }
+
+        /* ── Skills ── */
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem; margin-top: 1rem;
+        }
+        .skill-cat {
+            background: #fff; border-radius: 8px; padding: 1.2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .skill-cat h4 { color: #1b3a5c; font-size: 0.95rem; margin-bottom: 0.6rem; }
+        .skill-cat ul { padding-left: 1.1rem; }
+        .skill-cat ul li { color: #555; font-size: 0.9rem; margin-bottom: 0.25rem; }
+
+        /* ── Affiliations ── */
+        .affiliations {
+            display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem;
+        }
+        .aff-badge {
+            background: #1b3a5c; color: #fff; padding: 0.5rem 1.2rem;
+            border-radius: 20px; font-size: 0.85rem; font-weight: 500;
+        }
+
+        /* ── Contact ── */
+        .contact-section {
+            text-align: center; background: #fff; border-radius: 12px;
+            padding: 3rem 2rem; box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            margin-top: 1rem;
+        }
+        .contact-section h2 { color: #1b3a5c; font-size: 1.6rem; margin-bottom: 1rem; }
+        .contact-section p { color: #636e72; margin-bottom: 1.5rem; font-size: 1rem; }
+        .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+        .contact-links a {
+            color: #4da6ff; font-weight: 500; font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .contact-links a:hover { color: #1b3a5c; }
+        .contact-email-btn {
+            display: inline-block;
+            padding: 0.7rem 1.8rem;
+            background: #1b3a5c; color: #fff; border: none;
+            border-radius: 6px; font-size: 0.95rem; font-weight: 600;
+            cursor: pointer; transition: background 0.2s;
+        }
+        .contact-email-btn:hover { background: #2c5f8a; }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center; padding: 2rem;
+            color: #b2bec3; font-size: 0.85rem;
+            border-top: 1px solid #dfe6e9;
+            margin-top: 3rem;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .hero .title { font-size: 2.2rem; }
+            .hero .subtitle { font-size: 1rem; }
+            nav ul { gap: 1rem; font-size: 0.8rem; }
+            section { padding: 3rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="logo">Dr. Md Saifur <span>Rahman</span></div>
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="home">
+    <div class="hero-content">
+        <h1 class="title">Dr. Md Saifur Rahman</h1>
+        <p class="subtitle">Adjunct Faculty Candidate — Strategic Management · Business · Analytics · Operations &amp; Industrial Engineering</p>
+        <p class="contact-line">
+            <a href="mailto:rahman31376795@gmail.com">rahman31376795@gmail.com</a> ·
+            <a href="tel:+16463210902">(646) 321-0902</a>
+        </p>
+        <p class="contact-line" style="font-size:0.9rem; margin-bottom:2rem;">
+            Jamaica, NY 11435
+        </p>
+        <a href="#contact" class="hero-btn">Inquire About Teaching</a>
+    </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+    <h2 class="section-title">About Me</h2>
+    <p class="section-subtitle">Interdisciplinary educator, researcher, and industry practitioner</p>
+    <div class="about-text">
+        <p>I am an interdisciplinary educator, researcher, and industry practitioner with a <span class="highlight">PhD in Strategic Management</span> (University of the Cumberlands, July 2026), graduate training in strategic management and industrial engineering, and prior teaching-assistant experience at <span class="highlight">New Jersey Institute of Technology (NJIT)</span>.</p>
+        <p>My academic and professional interests span strategic management, leadership, organizational behavior, business analytics, operations research, project management, supply chain, risk assessment, financial analysis, systems analysis and simulation, and the application of artificial intelligence and data-driven methods to organizational decision-making.</p>
+        <p>I bring substantial industry experience in quantitative analysis, operations, financial modeling, portfolio analysis, process improvement, and executive leadership from roles at CG Realty Management LLC, Brightstone BD Ltd., SAK Structures/Criterion Group, and Accenture.</p>
+        <p>I am based in <span class="highlight">Jamaica, NY</span> and available for in-person and online teaching appointments.</p>
+    </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+    <h2 class="section-title">Education</h2>
+    <p class="section-subtitle">Doctorate and graduate training in strategic management and industrial engineering</p>
+    <div class="edu-grid">
+        <div class="edu-card">
+            <div class="degree">PhD, Strategic Management</div>
+            <div class="school">University of the Cumberlands</div>
+            <div class="date">July 2026</div>
+            <div class="detail">Dissertation: <em>The Impact of Healthcare Leadership Practices and Organizational Performance on Patient Outcomes in U.S. Hospitals.</em></div>
+        </div>
+        <div class="edu-card">
+            <div class="degree">MBA, Strategic Management</div>
+            <div class="school">University of the Cumberlands</div>
+            <div class="date">May 2023</div>
+            <div class="detail">Strategic Leadership · Managing in a Global Environment · Organizational Behavior · Business Ethics · Corporate Governance · Strategic Management Accounting</div>
+        </div>
+        <div class="edu-card">
+            <div class="degree">MS, Industrial Engineering</div>
+            <div class="school">New Jersey Institute of Technology (NJIT)</div>
+            <div class="date">December 2017</div>
+            <div class="detail">Project Management · Advanced Engineering Statistics · Systems Analysis &amp; Simulation · Operations Research · Supply Chain · Total Quality Management</div>
+        </div>
+        <div class="edu-card">
+            <div class="degree">BS, Footwear Engineering</div>
+            <div class="school">University of Dhaka, Bangladesh</div>
+            <div class="date">December 2013</div>
+            <div class="detail"></div>
+        </div>
+    </div>
+</section>
+
+<!-- TEACHING -->
+<section id="teaching">
+    <h2 class="section-title">Teaching Experience</h2>
+    <p class="section-subtitle">Academic instruction and corporate training</p>
+
+    <div class="teaching-block">
+        <h3>Teaching Assistant — Systems Analysis &amp; Simulation</h3>
+        <div class="org">New Jersey Institute of Technology (NJIT)</div>
+        <div class="period">March 2016 – December 2017</div>
+        <ul>
+            <li>Supported instruction for classes of approximately 30 students in systems analysis and simulation, including discrete-event simulation, system dynamics, Monte Carlo methods, modeling, and industrial applications.</li>
+            <li>Led classroom discussions and computer-lab activities and provided demonstrations to strengthen student understanding of simulation modeling, validation, statistical principles, and system performance evaluation.</li>
+            <li>Collaborated with the lead professor on lecture materials, presentations, assignments, and course content related to simulation tools, modeling methodologies, and system optimization.</li>
+            <li>Evaluated simulation models, programming assignments, quizzes, examinations, and projects and provided constructive feedback aligned with course objectives.</li>
+            <li>Held office hours and mentored students in applying systems analysis to operations research, logistics, manufacturing, and healthcare problems.</li>
+            <li>Supported course development by incorporating developments in simulation software, analytical methods, optimization, digital twins, and intelligent systems.</li>
+        </ul>
+    </div>
+
+    <div class="teaching-block">
+        <h3>Corporate Training &amp; Knowledge Transfer</h3>
+        <div class="org">CG Realty Management LLC · Brightstone BD Ltd.</div>
+        <div class="period">2020 – Present</div>
+        <ul>
+            <li>Designed and delivered internal training sessions on quantitative analysis, financial modeling, portfolio performance evaluation, and data-driven decision-making for cross-functional teams.</li>
+            <li>Mentored junior analysts and team members in analytical methodologies, statistical tools, and best practices for operations research and business analytics.</li>
+            <li>Developed training materials, standard operating procedures, and knowledge-transfer documentation to build organizational capability in analytical and simulation techniques.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+    <h2 class="section-title">Course Eligibility</h2>
+    <p class="section-subtitle">Courses I am prepared to teach at the undergraduate and graduate levels</p>
+    <div class="course-grid">
+        <div class="course-cat">
+            <h4>Undergraduate</h4>
+            <ul>
+                <li>Strategic Management</li>
+                <li>Management &amp; Leadership</li>
+                <li>Organizational Behavior</li>
+                <li>Business Analytics</li>
+                <li>Operations Management</li>
+                <li>Operations Research</li>
+                <li>Project Management</li>
+                <li>Supply Chain Management</li>
+                <li>Systems Analysis &amp; Simulation</li>
+                <li>Financial Analysis</li>
+                <li>Risk Management</li>
+                <li>Business Ethics</li>
+                <li>Management Information Systems</li>
+                <li>Intro to AI Applications in Business</li>
+                <li>Data Analysis</li>
+                <li>Introduction to Business</li>
+            </ul>
+        </div>
+        <div class="course-cat">
+            <h4>Graduate</h4>
+            <ul>
+                <li>Strategic Leadership</li>
+                <li>Advanced Operations Research</li>
+                <li>Systems Simulation &amp; Modeling</li>
+                <li>Financial Risk Analysis</li>
+                <li>Business Analytics &amp; Data-Driven Decision Making</li>
+                <li>Strategic Management Accounting</li>
+                <li>Technology Management &amp; AI in Organizations</li>
+                <li>Healthcare Strategic Management</li>
+                <li>Supply Chain Strategy</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+    <h2 class="section-title">Selected Publications</h2>
+    <p class="section-subtitle">14 peer-reviewed articles, conference papers, and book chapters</p>
+
+    <div class="pub-group">
+        <h3>Peer-Reviewed Journal Articles</h3>
+        <div class="pub-item">
+            <div class="authors">Mehely, K., Tanni, M. M. P., Tanji, E., Rahman, M. S., Apu, M. M. H., &amp; Ali, M. (2026).</div>
+            <div class="title">Data-driven strategic management in the U.S. industries: The role of management information systems and artificial intelligence.</div>
+            <div class="journal">Strategic Data Management and Innovation, 3(2).</div>
+            <div class="doi">https://doi.org/10.71292/sdmi.v3i02.33</div>
+        </div>
+        <div class="pub-item">
+            <div class="authors">Tanni, M. M. P., Mehely, K., Tanji, E., Rahman, M. S., Apu, M. M. H., &amp; Ali, M. M. (2026).</div>
+            <div class="title">Technology management and strategic decision making in US manufacturing firms: Insights from artificial intelligence and data-driven systems.</div>
+            <div class="journal">Strategic Data Management and Innovation, 3(1), 20–32.</div>
+        </div>
+        <div class="pub-item">
+            <div class="authors">Tanni, M. M. P., Mehely, K., Tanji, E., Rahman, M. S., Apu, M. M. H., &amp; Ali, M. (2026).</div>
+            <div class="title">Strategic integration of artificial intelligence in the US industrial management: A qualitative study of organizational transformation.</div>
+            <div class="journal">International Journal of Science and Engineering, 3(1), 1–9.</div>
+        </div>
+        <div class="pub-item">
+            <div class="authors">Tanji, E., Parveen, K., Dutta, S., Shahrear, S., Rabbani, H. M. R., Romana, M., ... &amp; Rahman, M. S. (2025).</div>
+            <div class="title">Artificial intelligence in medical care automation: Transforming healthcare delivery through intelligent systems.</div>
+            <div class="journal">Artificial Intelligence, 40(05).</div>
+        </div>
+        <div class="pub-item">
+            <div class="authors">Sarker, M. R., Islam, M., Marma, U. A. S., &amp; Rahman, M. S. (2024).</div>
+            <div class="title">Circular economy strategies: A fuzzy DEMATEL decision framework for the fast fashion footwear manufacture.</div>
+            <div class="journal">Discover Sustainability, 5(1), 20.</div>
+            <div class="doi">https://doi.org/10.1007/s43621-024-00484-z</div>
+        </div>
+        <div class="pub-item">
+            <div class="authors">Islam, M. S., Rony, M. A. T., Ahammad, M., Alam, S. M. N., &amp; Rahman, M. S. (2024).</div>
+            <div class="title">An innovative novel transformer model and datasets for safeguarding religious sensitivities in online social platforms.</div>
+            <div class="journal">Procedia Computer Science, 233, 988–997.</div>
+            <div class="doi">https://doi.org/10.1016/j.procs.2024.03.288</div>
+        </div>
+        <div class="pub-item">
+            <div class="authors">Chan, M. P., Rahman, S., Shahrear, S., Upreti, M., Uddin, S. M. R., &amp; Haider, S. A. (2024).</div>
+            <div class="title">Financial risk management in the cryptocurrency market: An analysis driven by machine learning.</div>
+            <div class="journal">69(07).</div>
+        </div>
+        <div class="pub-item">
+            <div class="authors">Adnan, A., Rahman, S., Maliha, J., Shahrear, S., Tinny, S. S., Mohammad, K., &amp; Haider, S. A. (2024).</div>
+            <div class="title">Analysis of identification of cybercrimes using cybersecurity analytics powered by artificial intelligence.</div>
+            <div class="journal">Chinese Science Bulletin (Chinese Version), 69(7), 2595.</div>
+        </div>
+        <div class="pub-item">
+            <div class="authors">Shahruzzaman, M., Saha, D., &amp; Rahman, M. S. (2015).</div>
+            <div class="title">Application of Plackett-Burman design to benzylation of o-cresol with benzyl alcohol.</div>
+            <div class="journal">Bangladesh Journal of Scientific and Industrial Research, 50(3), 169.</div>
+            <div class="doi">https://doi.org/10.3329/bjsir.v50i3.25580</div>
+        </div>
+    </div>
+
+    <div class="pub-group">
+        <h3>Conference Papers</h3>
+        <div class="pub-item">
+            <div class="authors">Rony, M. A. T., Islam, M. S., Saha, P., Johora, F. T., Ahammad, M., Alam, S. M. N., Rahman, M. S., &amp; Nag, A. (2024, April).</div>
+            <div class="title">Deciphering diabetes: Illuminating prognostic insights with an interpretable machine learning framework.</div>
+            <div class="journal">International Conference on Artificial Intelligence, Computing, IoT and Data Analytics.</div>
+        </div>
+        <div class="pub-item">
+            <div class="authors">Islam, M. S., Rony, M. A. T., Saha, P., Ahammad, M., Alam, S. M. N., &amp; Rahman, M. S. (2023).</div>
+            <div class="title">Beyond words: Unraveling text complexity with novel dataset and a classifier application.</div>
+            <div class="journal">26th International Conference on Computer and Information Technology (ICCIT).</div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+    <h2 class="section-title">Professional Experience</h2>
+    <p class="section-subtitle">Industry background and leadership roles</p>
+
+    <div class="exp-item">
+        <div class="role">Director – Operations Research Analyst</div>
+        <div class="company">CG Realty Management LLC</div>
+        <div class="period">June 2020 – June 2026</div>
+        <ul>
+            <li>Developed quantitative and statistical analyses to evaluate portfolio performance, profit and loss, pricing, cost, income, and project feasibility.</li>
+            <li>Compared projected and actual results, investigated variances, and translated findings into decision-support information for leadership.</li>
+            <li>Partnered with project teams on quantitative solutions, market analysis, budgeting, reporting, risk considerations, and evaluation of new opportunities.</li>
+            <li>Applied analytical methods to practical business problems involving financial performance, resource allocation, and operational decision-making.</li>
+        </ul>
+    </div>
+
+    <div class="exp-item">
+        <div class="role">Founder &amp; CEO</div>
+        <div class="company">Brightstone BD Ltd. · Dhaka, Bangladesh</div>
+        <div class="period">August 2020 – Present</div>
+        <ul>
+            <li>Established and lead an international services operation, including team recruitment and training, budgeting, performance management, operational oversight, and organizational development.</li>
+            <li>Coordinate cross-functional work, promote collaborative culture, and guide teams in delivering analytics and architecture-related services.</li>
+        </ul>
+    </div>
+
+    <div class="exp-item">
+        <div class="role">Financial Analyst</div>
+        <div class="company">SAK Structures LLC d/b/a Criterion Group LLC</div>
+        <div class="period">May 2018 – May 2020</div>
+        <ul>
+            <li>Developed and maintained financial and quantitative models supporting portfolio analysis, budgeting, feasibility assessment, loan sizing, pricing, and project evaluation.</li>
+            <li>Built a rapid property-analysis application to support acquisition screening and go/no-go decisions.</li>
+            <li>Performed variance analysis, maintained project timelines, and supported reporting and cross-functional budget discussions.</li>
+        </ul>
+    </div>
+
+    <div class="exp-item">
+        <div class="role">Senior Business Analyst</div>
+        <div class="company">Accenture Footwear &amp; Leather Products Ltd. · Dhaka, Bangladesh</div>
+        <div class="period">January 2013 – December 2015</div>
+        <ul>
+            <li>Applied regression, forecasting, optimization, econometric techniques, time-series analysis, GARCH models, simulation, and scenario analysis to business and financial questions.</li>
+            <li>Built financial models, attribution frameworks, dashboards, P&amp;L analyses, and data-driven approaches to resource allocation and pricing.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+    <h2 class="section-title">Research &amp; Technical Expertise</h2>
+    <p class="section-subtitle">Research interests and analytical capabilities</p>
+
+    <div class="skills-grid">
+        <div class="skill-cat">
+            <h4>Research Interests</h4>
+            <ul>
+                <li>Strategic Management</li>
+                <li>Leadership &amp; Organizational Behavior</li>
+                <li>Healthcare Management &amp; Outcomes</li>
+                <li>AI in Business &amp; Industry</li>
+                <li>Data-Driven Decision-Making</li>
+                <li>Technology Management</li>
+                <li>Industrial Engineering</li>
+                <li>Sustainability &amp; Circular Economy</li>
+                <li>Financial Risk Analysis</li>
+                <li>Process Improvement</li>
+                <li>Machine Learning Applications</li>
+            </ul>
+        </div>
+        <div class="skill-cat">
+            <h4>Technical &amp; Analytical Skills</h4>
+            <ul>
+                <li><strong>Simulation:</strong> Discrete-event, system dynamics, Monte Carlo, digital twins</li>
+                <li><strong>Data Analysis:</strong> Regression, forecasting, optimization, scenario analysis</li>
+                <li><strong>Financial Modeling:</strong> Portfolio analysis, P&amp;L, pricing, feasibility, cost analysis</li>
+                <li><strong>Risk &amp; Decision Tools:</strong> GARCH, fuzzy DEMATEL, econometric analysis, variance analysis</li>
+                <li><strong>Methodologies:</strong> Qualitative (case studies, interviews, thematic analysis), Quantitative (statistical, simulation), Mixed methods</li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem;">
+        <h3 style="color:#1b3a5c; font-size:1.1rem; margin-bottom:0.8rem;">Professional Affiliations</h3>
+        <div class="affiliations">
+            <span class="aff-badge">Institute of Industrial and Systems Engineers (IISE)</span>
+            <span class="aff-badge">Engineers Without Borders USA</span>
+            <span class="aff-badge">Association for Supply Chain Management (ASCM), USA</span>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="contact-section">
+        <h2>Get In Touch</h2>
+        <p>Available for adjunct teaching appointments — in-person and online. Based in Jamaica, NY.</p>
+        <div class="contact-links">
+            <a href="mailto:rahman31376795@gmail.com">✉️ rahman31376795@gmail.com</a>
+            <a href="tel:+16463210902">📞 (646) 321-0902</a>
+            <a href="https://linkedin.com/in/md-saifur-rahman-a20953135" target="_blank">💼 LinkedIn</a>
+            <a href="https://scholar.google.com/citations?user=uncLJ78AAAAJ" target="_blank">📚 Google Scholar</a>
+            <a href="https://www.researchgate.net/profile/Md-Saifur-Rahman-25" target="_blank">🔬 ResearchGate</a>
+        </div>
+        <a href="mailto:rahman31376795@gmail.com?subject=Adjunct%20Teaching%20Inquiry%20-%20Dr.%20Md%20Saifur%20Rahman" class="contact-email-btn">Send Teaching Inquiry</a>
+        <p style="margin-top:1.5rem; font-size:0.85rem; color:#b2bec3;">References and full publication list available upon request.</p>
+    </div>
+</section>
+
+<footer>
+    &copy; 2026 Dr. Md Saifur Rahman. All rights reserved. &nbsp;|&nbsp; Jamaica, NY
+</footer>
+
+<!-- Smooth scroll for nav links -->
+<script>
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+</script>
+
+</body>
+</html>
